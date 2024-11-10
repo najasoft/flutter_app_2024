@@ -1,6 +1,6 @@
 name: flutter_app_2024
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
@@ -10,8 +10,9 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_slidable: ^3.1.1
-  
- 
+  image_picker: ^1.1.2
+  path: ^1.9.0
+  path_provider: ^2.1.5
 
 dev_dependencies:
   flutter_test:
@@ -20,3 +21,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/
