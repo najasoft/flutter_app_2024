@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_2024/model/produit.dart';
+import 'package:flutter_app_2024/data/base.dart';
 
 class ProduitDetails extends StatelessWidget {
   final Produit produit;
@@ -9,29 +9,33 @@ class ProduitDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(produit.libelle!,
+        title: Text(produit.libelle,
             style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Image.file(
-                File(produit.photo!),
-                height: 160,
-                width: 160,
-              ),
-              const SizedBox(height: 16),
-              Text('Prix: ${produit.prix}',
-                  style: const TextStyle(fontSize: 16)),
-              const SizedBox(height: 16),
-              Text(
-                'Description: ${produit.description}',
-                style: const TextStyle(fontSize: 16),
-              ),
-            ],
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image.file(
+                  File(produit.photo),
+                  height: 160,
+                  width: 160,
+                ),
+                const SizedBox(height: 16),
+                Text('Prix: ${produit.prix}',
+                    style: const TextStyle(fontSize: 16)),
+                const SizedBox(height: 16),
+                Text(
+                  'Description: ${produit.description}',
+                  style: const TextStyle(fontSize: 16),
+                  maxLines: null,
+                  overflow: TextOverflow.visible,
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_2024/dao/produit_dao.dart';
+import 'package:flutter_app_2024/data/base.dart';
 import 'package:flutter_app_2024/produits_list.dart';
 
 void main() {
-  runApp(const MainApp());
+  final database = ProduitsDatabase();
+  final produitDAO = ProduitDAO(database);
+  runApp(MainApp(
+    produitDAO: produitDAO,
+  ));
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  final ProduitDAO produitDAO;
+  const MainApp({super.key, required this.produitDAO});
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +22,6 @@ class MainApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const ProduitsList());
+        home: ProduitsList(produitDAO: produitDAO));
   }
 }

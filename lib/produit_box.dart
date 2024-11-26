@@ -1,21 +1,19 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_2024/model/produit.dart';
+import 'package:flutter_app_2024/dao/produit_dao.dart';
+import 'package:flutter_app_2024/data/base.dart';
 import 'package:flutter_app_2024/produit_details.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class ProduitBox extends StatelessWidget {
   final Produit produit;
-  final bool selProduit;
-  final Function(BuildContext context)? delProduit;
-  final Function(bool?)? onChanged;
+  final ProduitDAO produitDAO;
 
-  const ProduitBox(
-      {super.key,
-      required this.produit,
-      required this.selProduit,
-      required this.delProduit,
-      required this.onChanged});
+  const ProduitBox({
+    super.key,
+    required this.produit,
+    required this.produitDAO,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +24,7 @@ class ProduitBox extends StatelessWidget {
           motion: const StretchMotion(),
           children: [
             SlidableAction(
-              onPressed: delProduit,
+              onPressed: (context) => produitDAO.deleteProduitBuId(produit.id),
               icon: Icons.delete,
               backgroundColor: Colors.red,
               borderRadius: BorderRadius.circular(45),
@@ -48,16 +46,13 @@ class ProduitBox extends StatelessWidget {
             height: 120,
             child: Row(
               children: [
-                Checkbox(
-                  value: selProduit,
-                  onChanged: onChanged,
-                ),
+                const SizedBox(width: 10),
                 Center(
                   child:
-                      Image.file(width: 50, height: 50, File(produit.photo!)),
+                      Image.file(width: 100, height: 100, File(produit.photo)),
                 ),
                 const SizedBox(width: 10),
-                Text(produit.libelle!),
+                Text(produit.libelle),
               ],
             ),
           ),
